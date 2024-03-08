@@ -14,6 +14,11 @@ namespace FoodAPI.Controllers
 		{
 			context = _context;
 		}
+		[HttpGet("get")]
+		public async Task<List<Food>?> GetFoods(string input)
+		{
+			return await context.Foods.Where(x => x.Description.ToLower().Contains(input.ToLower().Trim())).ToListAsync();
+		}
 
 		[HttpPost("add")]
 		public async Task<IActionResult> Add(AddFoodModel model)
