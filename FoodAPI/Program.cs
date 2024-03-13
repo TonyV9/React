@@ -14,6 +14,16 @@ namespace FoodAPI
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 			});
 
+			builder.Services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(builder =>
+				{
+					builder.AllowAnyOrigin()
+						   .AllowAnyMethod()
+						   .AllowAnyHeader();
+				});
+			});
+
 			builder.Services.AddControllers();
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
@@ -27,6 +37,7 @@ namespace FoodAPI
 			}
 
 			app.UseHttpsRedirection();
+			app.UseCors();
 			app.UseAuthorization();
 			app.MapControllers();
 			app.Run();

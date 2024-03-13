@@ -395,3 +395,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+FoodAPI/.vs/FoodAPI/v17/.suo
