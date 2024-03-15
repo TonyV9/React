@@ -13,19 +13,19 @@ namespace FoodAPI.Models
 		public string Description { get; set; } = null!;
 
 		[Required]
-		[Range(0f, 9999f)]
+		[Range(0f, 5000f)]
 		public float Kcal { get; set; }
 
 		[Required]
-		[Range(0f, 9999f)]
+		[Range(0f, 5000f)]
 		public float Protein { get; set; }
 
 		[Required]
-		[Range(0f, 9999f)]
+		[Range(0f, 5000f)]
 		public float Fat { get; set; }
 
 		[Required]
-		[Range(0f, 9999f)]
+		[Range(0f, 5000f)]
 		public float Carbs { get; set; }
 	}
 }
