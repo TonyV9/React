@@ -83,6 +83,7 @@
   font-size: 16px;
   cursor: pointer;
   width: fit-content;
+  text-decoration: none;
   display: block;
 }
 
@@ -92,11 +93,6 @@
 
 .add-btn{
   padding: 7px 10px;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
 }
 
 .remove-btn {
@@ -112,13 +108,6 @@
   background-color: #960606;
 }
 
-.red {
-  color:#d83030;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin: 0;
-}
-
 .top-box {
   display: flex;
   gap: 120px;
@@ -132,8 +121,8 @@
 
 .success-message {
   position: fixed;
-  top: 100px;
-  right: 42vw;
+  top: 30px;
+  right: 30px;
   background-color: #359338;
   color: white;
   padding: 15px 20px;
@@ -141,12 +130,12 @@
   font-size: 1.2rem;
   width: fit-content;
   z-index: 999;
-  animation: fadeInOut 3s ease-in-out;
+  animation: fadeInOut 1.1s ease-in-out;
 }
-.home-error-message {
+.error-message {
   position: fixed;
-  top: 100px;
-  right: 45vw;
+  top: 30px;
+  right: 30px;
   background-color: #d83030;
   color: white;
   padding: 15px 20px;
@@ -154,7 +143,7 @@
   font-size: 1.2rem;
   width: fit-content;
   z-index: 999;
-  animation: fadeInOut 3s ease-in-out;
+  animation: fadeInOut 1.1s ease-in-out;
 }
 
 .bold {
@@ -174,40 +163,6 @@
   100% {
     opacity: 0;
   }
-}
-
-.modal-overlay {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-
-.modal-content {
-  background-color: white;
-  position: relative;
-  width: 30%;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.modal-close {
-  position: absolute;
-  top: 13px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 40px;
-  color: #333333;
-}
-
-.modal-close:hover {
-  color: #616161;
 }
 
 .form-group {
@@ -242,7 +197,21 @@ label {
   background-color: #250064;
 }
 
-.error-message {
-  color: #d83030;
-  margin-bottom: 10px;
+.btn-box{
+  display: flex;
+  justify-content: center;
+  gap: 5vw;
+}
+
+.back-button{
+  background-color: #606060;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  width: fit-content;
+  text-decoration: none;
+  display: block;
 }

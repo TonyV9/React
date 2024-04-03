@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './home.css';
-import ModalForm from './ModalForm';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const ENDPOINT = "https://localhost:7092";
     const [selectedItems, setSelectedItems] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setHomeErrorMessage] = useState('');
-
 
     const handleSearchChange = async (e) => {
         const { value } = e.target;
@@ -25,62 +21,19 @@ const Home = () => {
                 console.error(err);
             }
         }
-        else{
+        else {
             setSearchResults([]);
         }
     };
 
-    useEffect(() => {
-        if (successMessage) {
-            const timer = setTimeout(() => {
-                setSuccessMessage("");
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [successMessage]);
-
-    useEffect(() => {
-        if (errorMessage) {
-            const timer = setTimeout(() => {
-                setHomeErrorMessage("");
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [errorMessage]);
-
     const handleAddItemClick = (item) => {
         setSelectedItems([...selectedItems, item]);
-    };
-
-    const handleSubmitForm = (formData) => {
-        fetch(`${ENDPOINT}/api/Food/add`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-            .then(response => {
-                if (response.ok) {
-                    setShowModal(false);
-                    setSuccessMessage("Created successfully");
-                } else {
-                    throw new Error("Failed creation");
-                }
-            })
-            .catch(error => {
-                setShowModal(false);
-                setHomeErrorMessage("Failed creation");
-            });
     };
 
     const handleRemoveItemClick = (indexToRemove) => {
         const updatedSelectedItems = selectedItems.filter((item, index) => index !== indexToRemove);
         setSelectedItems(updatedSelectedItems);
     };
-
-
-
 
     const columns = [
         {
@@ -140,17 +93,14 @@ const Home = () => {
         setSearchResults([]);
     }
 
-
     const total = calculateTotal();
 
     return (
         <>
             <h2 className='heading'>Food Lookup</h2>
-            {successMessage && <div className="success-message">{successMessage}</div>}
-            {errorMessage && <div className="home-error-message">{errorMessage}</div>}
             <div className='main'>
                 <div className='top-box'>
-                    <button className="add-button" onClick={() => setShowModal(true)}>Add Food</button>
+                    <Link className="add-button" to={'/add'} >Add Food</Link>
                 </div>
                 <div className="selected-table">
                     <div className='selected-row'>
@@ -205,8 +155,8 @@ const Home = () => {
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" 
-                            fill='#000000'/>
+                            <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                                fill='#000000' />
                         </svg>
                         <svg onClick={clear} className='clear-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path d="M6.29 6.71a.996.996 0 0 0 0 1.41L10.59 12 6.29 16.29a.996.996 0 1 0 1.41 1.41L12 13.41l4.29 4.3a.996.996 0 1 0 1.41-1.41L13.41 12l4.3-4.29a.996.996 0 1 0-1.41-1.41L12 10.59 7.71 6.29a.996.996 0 0 0-1.41 0z"
@@ -237,7 +187,6 @@ const Home = () => {
                         </table>
                     </div>
                 </div>
-                <ModalForm visible={showModal} onClose={() => setShowModal(false)} onSubmit={handleSubmitForm} />
             </div>
         </>
     );
